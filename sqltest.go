@@ -177,6 +177,7 @@ func newParserConfig(opts ...option) *parseConfig {
 	if p.parsers == nil {
 		p.parsers = []QueryParser{
 			&define{},
+			&except{},
 		}
 	}
 	return p
