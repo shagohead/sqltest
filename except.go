@@ -18,6 +18,7 @@ const (
 var (
 	errExceptMissQuery = errors.New("missing query in except statement")
 	errExceptMissStr   = errors.New("missing exception substring in except statement")
+	errExceptNoError   = errors.New("expected an error but query succeeded unexpectedly")
 )
 
 // Parse implements QueryParser.
@@ -51,6 +52,9 @@ type exceptQuerier struct {
 // Query implements Querier.
 func (e *exceptQuerier) Query(ctx context.Context, tx Tx) error {
 	err := tx.Exec(ctx, e.query)
+	if err == nil {
+		return errExceptNoError
+	}
 	if strings.Contains(err.Error(), e.except) {
 		return nil
 	}
