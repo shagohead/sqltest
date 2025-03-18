@@ -170,6 +170,7 @@ func TestDefaultFileSet(t *testing.T) {
 	for k := range got.All() {
 		keys = append(keys, k)
 	}
+	slices.Sort(keys)
 	if g, w := strings.Join(keys, ", "), "testdata/first.sql, testdata/second.sql"; g != w {
 		t.Fatalf("DefaultFileSet() keys: %q, want %q", g, w)
 	}

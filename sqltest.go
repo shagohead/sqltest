@@ -101,7 +101,10 @@ type query struct {
 
 type QueryParser interface {
 	// Parse is trying to parse query source to Querier object or updated context.
-	// If query source not related to QueryParser implementation, Parse should return nil for all values.
+	//
+	// If query source is not related to QueryParser implementation, it should return nils.
+	// That is, Parse returns either the context, or the Querier, or nothing.
+	// If it returns not nil, then the processing of the current query will be stopped at this QueryParser.
 	Parse(context.Context, []byte) (context.Context, Querier, error)
 }
 

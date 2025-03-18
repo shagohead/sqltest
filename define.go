@@ -118,7 +118,7 @@ func (a *assertQuerier) Query(ctx context.Context, tx Tx) error {
 
 var _ Querier = (*assertQuerier)(nil)
 
-// Parse implements Command.
+// Parse implements QueryParser.
 func (d *define) Parse(ctx context.Context, src []byte) (context.Context, Querier, error) {
 	source := string(src)
 	if strings.HasPrefix(source, defineKey) {
