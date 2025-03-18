@@ -17,6 +17,7 @@ migrations/testdata/emp_log_salary.sql
 ```
 
 ```go
+// migrations/schema_test.go
 package migrations
 
 import (
@@ -47,6 +48,7 @@ func TestSchema(t *testing.T) {
 Database migration in which table emp_log populated by trigger on writes in emp table.
 
 ```sql
+-- migrations/initial.sql
 CREATE TABLE emp (
   user_id integer PRIMARY KEY GENERATED AS DEFAULT BY IDENTITY,
   salary integer NOT NULL
@@ -79,6 +81,7 @@ Second one calls that query by its name and compare representation of results.
 If query do not use that keywords, it just invokes and checks for error occur.
 
 ```sql
+-- migrations/emp_log_salary.sql
 define get_last_log
 SELECT user_id, salary FROM emp_log ORDER BY id DESC;
 
